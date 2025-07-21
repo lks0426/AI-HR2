@@ -1,24 +1,45 @@
-# Use Node.js 18 Alpine for smaller image size
-FROM node:18-alpine
+# 使用官方 Node.js 运行时作为基础镜像
+FROM node:18-alpine AS base
 
-# Set working directory
+# 安装依赖
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Install dependencies
+# 复制 package.json 和 package-lock.json
 COPY package*.json ./
 RUN npm ci
 
-# Copy source code (excluding .next due to .dockerignore)
+# 构建应用
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Build the application with fresh, clean build
+# 构建应用
 RUN npm run build
 
-# Expose port 3000
-EXPOSE 3000
+# 生产镜像
+FROM base AS runner
+WORKDIR /app
 
-# Set production environment
 ENV NODE_ENV=production
 
-# Start the application
-CMD ["npm", "start"]
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# 复制构建文件
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+# 创建public目录（如果需要）
+RUN mkdir -p ./public
+
+USER nextjs
+
+EXPOSE 3000
+
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+CMD ["node", "server.js"]

@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  // Remove standalone mode for proper CSS loading
+  // output: 'standalone',
 }
 
 module.exports = nextConfig

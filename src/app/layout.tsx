@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -6,7 +6,6 @@ export const metadata: Metadata = {
   description: '全面的AI与人力资源市场调研报告，为企业决策提供专业数据支持和战略洞察',
   keywords: 'AI, 人力资源, 市场调研, 商业分析, 企业战略',
   authors: [{ name: 'AI-HR Research Team' }],
-  viewport: 'width=device-width, initial-scale=1',
   robots: 'index, follow',
   openGraph: {
     title: 'AI+HR市场调研报告',
@@ -14,6 +13,11 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'zh_CN',
   }
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({

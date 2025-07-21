@@ -113,7 +113,9 @@ export default function CaseStudy() {
         {/* Key Metrics */}
         <div className="card p-8 mb-12">
           <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">转型成果数据对比</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          
+          {/* Desktop grid */}
+          <div className="hidden md:grid md:grid-cols-4 gap-6">
             {cybozuCaseStudy.map((metric, index) => (
               <div 
                 key={index}
@@ -135,6 +137,41 @@ export default function CaseStudy() {
                   </div>
                   <div className="bg-blue-50 text-blue-600 px-2 py-1 rounded text-xs font-medium mt-auto">
                     {metric.improvement}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          {/* Mobile layout */}
+          <div className="md:hidden space-y-4">
+            {cybozuCaseStudy.map((metric, index) => (
+              <div 
+                key={index}
+                className={`cursor-pointer transition-all duration-200 ${
+                  activeMetric === index ? 'transform scale-[1.02]' : ''
+                }`}
+                onClick={() => setActiveMetric(index)}
+              >
+                <div className={`card p-4 ${
+                  activeMetric === index ? 'ring-2 ring-primary-500' : ''
+                }`}>
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="font-semibold text-gray-900 text-base">{metric.metric}</h4>
+                    <div className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-medium">
+                      {metric.improvement}
+                    </div>
+                  </div>
+                  <div className="flex flex-col space-y-2">
+                    <div className="flex items-center space-x-3">
+                      <span className="text-gray-500 text-sm font-medium">变革前：</span>
+                      <span className="text-gray-700 text-sm flex-1">{metric.before}</span>
+                    </div>
+                    <ArrowRight className="h-4 w-4 text-gray-400 self-start ml-12" />
+                    <div className="flex items-center space-x-3">
+                      <span className="text-blue-600 text-sm font-medium">变革后：</span>
+                      <span className="text-blue-700 text-sm font-semibold flex-1">{metric.after}</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -227,7 +264,8 @@ export default function CaseStudy() {
           <h3 className="text-xl font-semibold text-gray-900 mb-6">Cybozu成功公式</h3>
           <div className="bg-gradient-to-r from-blue-50 to-green-50 border border-gray-200 rounded-lg p-6">
             <div className="text-center">
-              <div className="flex items-center justify-center space-x-4 text-lg font-semibold text-gray-900">
+              {/* Desktop version */}
+              <div className="hidden md:flex items-center justify-center space-x-4 text-lg font-semibold text-gray-900">
                 <span className="bg-slate-50 px-4 py-2 rounded-lg text-slate-700">员工自主权</span>
                 <span className="text-gray-400">+</span>
                 <span className="bg-blue-50 px-4 py-2 rounded-lg text-blue-700">透明文化</span>
@@ -236,7 +274,21 @@ export default function CaseStudy() {
                 <span className="text-gray-400">=</span>
                 <span className="bg-emerald-50 px-4 py-2 rounded-lg text-emerald-700">高投入度</span>
               </div>
-              <p className="text-gray-600 mt-4 text-sm">
+              
+              {/* Mobile version */}
+              <div className="md:hidden space-y-3">
+                <div className="flex flex-col space-y-2">
+                  <span className="bg-slate-50 px-4 py-3 rounded-lg text-slate-700 text-base font-semibold">员工自主权</span>
+                  <span className="text-gray-400 text-2xl">+</span>
+                  <span className="bg-blue-50 px-4 py-3 rounded-lg text-blue-700 text-base font-semibold">透明文化</span>
+                  <span className="text-gray-400 text-2xl">+</span>
+                  <span className="bg-indigo-50 px-4 py-3 rounded-lg text-indigo-700 text-base font-semibold">个性化制度</span>
+                  <span className="text-gray-400 text-2xl">=</span>
+                  <span className="bg-emerald-50 px-4 py-3 rounded-lg text-emerald-700 text-base font-semibold">高投入度</span>
+                </div>
+              </div>
+              
+              <p className="text-gray-600 mt-6 text-sm leading-relaxed px-2">
                 这一成功公式完美映证了JD-R模型理论：通过提供充足的工作资源（自主权、支持、发展机会），
                 有效平衡工作要求，从而提升员工工作投入度。
               </p>

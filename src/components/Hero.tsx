@@ -24,12 +24,6 @@ export default function Hero() {
             响应政府"工作方式改革"倡议，为100-1000人规模企业提供科学的员工幸福度管理平台
           </p>
 
-          {/* CI/CD TEST MESSAGE */}
-          <div className="bg-green-100 border-2 border-green-500 rounded-lg p-4 mb-6 animate-pulse">
-            <p className="text-green-800 text-lg font-bold">
-              🎉 CI/CD自动部署测试成功！现在是北京时间 {new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })}
-            </p>
-          </div>
 
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8 animate-scale-in">
             <p className="text-blue-800 text-sm md:text-base">

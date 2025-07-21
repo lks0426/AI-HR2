@@ -1,0 +1,40 @@
+{
+  "family": "ai-hr-task",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::345289096628:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::345289096628:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "ai-hr-container",
+      "image": "345289096628.dkr.ecr.ap-northeast-1.amazonaws.com/ai-hr-app:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/ai-hr-app",
+          "awslogs-region": "ap-northeast-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "environment": [
+        {
+          "name": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "name": "PORT",
+          "value": "3000"
+        }
+      ]
+    }
+  ]
+}

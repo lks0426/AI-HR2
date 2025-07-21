@@ -1,0 +1,17 @@
+{
+    "Changes": [
+        {
+            "Action": "UPSERT",
+            "ResourceRecordSet": {
+                "Name": "_f3abe3e818bbc1bcfefd0d9730b98d9b.ai-hr.lks0426.com",
+                "Type": "CNAME",
+                "TTL": 60,
+                "ResourceRecords": [
+                    {
+                        "Value": "_0762964029bfcefb68163e396d77ff38.xlfgrmvvlj.acm-validations.aws"
+                    }
+                ]
+            }
+        }
+    ]
+}

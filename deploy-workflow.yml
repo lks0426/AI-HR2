@@ -9,8 +9,8 @@ on:
 env:
   AWS_REGION: ap-northeast-1
   ECR_REPOSITORY: ai-hr-app
-  ECS_SERVICE: ai-hr-service-v2  # 🔄 更新：使用清理后的正确服务名
-  ECS_CLUSTER: ai-hr-cluster     # ✅ 保持：使用清理后保留的集群
+  ECS_SERVICE: ai-hr-service-v2  # ✅ 正确：这是Claude Code暴力创建后我们保留的服务
+  ECS_CLUSTER: ai-hr-cluster     # ✅ 正确：这是我们清理后保留的唯一集群
   ECS_TASK_DEFINITION: ai-hr-task
   CONTAINER_NAME: ai-hr-container
 
@@ -51,21 +51,7 @@ jobs:
 
     - name: Download task definition
       run: |
-        # 获取当前服务正在使用的任务定义版本
-        CURRENT_TASK_DEF=$(aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE --query 'services[0].taskDefinition' --output text)
-        echo "Current task definition: $CURRENT_TASK_DEF"
-        aws ecs describe-task-definition --task-definition $CURRENT_TASK_DEF --query taskDefinition > task-definition.json
-
-    - name: Verify service status before deployment
-      run: |
-        echo "🔍 Verifying service status..."
-        SERVICE_STATUS=$(aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE --query 'services[0].status' --output text)
-        echo "Service status: $SERVICE_STATUS"
-        if [ "$SERVICE_STATUS" != "ACTIVE" ]; then
-          echo "❌ Service is not ACTIVE. Current status: $SERVICE_STATUS"
-          exit 1
-        fi
-        echo "✅ Service is ACTIVE and ready for deployment"
+        aws ecs describe-task-definition --task-definition $ECS_TASK_DEFINITION --query taskDefinition > task-definition.json
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
@@ -82,18 +68,6 @@ jobs:
         service: ${{ env.ECS_SERVICE }}
         cluster: ${{ env.ECS_CLUSTER }}
         wait-for-service-stability: true
-      env:
-        # 添加调试信息
-        AWS_MAX_ATTEMPTS: 3
-        AWS_RETRY_MODE: adaptive
-
-    - name: Debug service status
-      if: failure()
-      run: |
-        echo "🔍 Debugging service status..."
-        aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE
-        echo "🔍 Checking recent events..."
-        aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE --query 'services[0].events[0:5]'
 
     - name: Post-deployment verification
       run: |

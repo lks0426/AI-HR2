@@ -9,8 +9,8 @@ on:
 env:
   AWS_REGION: ap-northeast-1
   ECR_REPOSITORY: ai-hr-app
-  ECS_SERVICE: ai-hr-service
-  ECS_CLUSTER: ai-hr-cluster
+  ECS_SERVICE: ai-hr-service-v2  # 🔄 更新：使用清理后的正确服务名
+  ECS_CLUSTER: ai-hr-cluster     # ✅ 保持：使用清理后保留的集群
   ECS_TASK_DEFINITION: ai-hr-task
   CONTAINER_NAME: ai-hr-container
 
@@ -82,5 +82,15 @@ jobs:
           echo "✅ Health check passed!"
         else
           echo "❌ Health check failed!"
+          exit 1
+        fi
+        
+        # 🔍 额外的CSS验证检查（防止CSS 404问题）
+        echo "🧪 Verifying CSS loading..."
+        CSS_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://ai-hr.lks0426.com/_next/static/css/$(curl -s https://ai-hr.lks0426.com | grep -o '_next/static/css/[^"]*' | head -1 | cut -d'/' -f4)")
+        if [ "$CSS_STATUS" = "200" ]; then
+          echo "✅ CSS verification passed!"
+        else
+          echo "❌ CSS verification failed! Status: $CSS_STATUS"
           exit 1
         fi

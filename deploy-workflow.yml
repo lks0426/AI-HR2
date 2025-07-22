@@ -51,7 +51,21 @@ jobs:
 
     - name: Download task definition
       run: |
-        aws ecs describe-task-definition --task-definition $ECS_TASK_DEFINITION --query taskDefinition > task-definition.json
+        # 获取当前服务正在使用的任务定义版本
+        CURRENT_TASK_DEF=$(aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE --query 'services[0].taskDefinition' --output text)
+        echo "Current task definition: $CURRENT_TASK_DEF"
+        aws ecs describe-task-definition --task-definition $CURRENT_TASK_DEF --query taskDefinition > task-definition.json
+
+    - name: Verify service status before deployment
+      run: |
+        echo "🔍 Verifying service status..."
+        SERVICE_STATUS=$(aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE --query 'services[0].status' --output text)
+        echo "Service status: $SERVICE_STATUS"
+        if [ "$SERVICE_STATUS" != "ACTIVE" ]; then
+          echo "❌ Service is not ACTIVE. Current status: $SERVICE_STATUS"
+          exit 1
+        fi
+        echo "✅ Service is ACTIVE and ready for deployment"
 
     - name: Fill in the new image ID in the Amazon ECS task definition
       id: task-def
@@ -68,6 +82,18 @@ jobs:
         service: ${{ env.ECS_SERVICE }}
         cluster: ${{ env.ECS_CLUSTER }}
         wait-for-service-stability: true
+      env:
+        # 添加调试信息
+        AWS_MAX_ATTEMPTS: 3
+        AWS_RETRY_MODE: adaptive
+
+    - name: Debug service status
+      if: failure()
+      run: |
+        echo "🔍 Debugging service status..."
+        aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE
+        echo "🔍 Checking recent events..."
+        aws ecs describe-services --cluster $ECS_CLUSTER --services $ECS_SERVICE --query 'services[0].events[0:5]'
 
     - name: Post-deployment verification
       run: |

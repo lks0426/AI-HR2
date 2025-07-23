@@ -2,16 +2,16 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'AI+HR市场调研报告 | 专业商业分析',
-  description: '全面的AI与人力资源市场调研报告，为企业决策提供专业数据支持和战略洞察',
-  keywords: 'AI, 人力资源, 市场调研, 商业分析, 企业战略',
+  title: 'AI+HR Market Research Report | Professional Business Analysis',
+  description: 'Comprehensive AI and Human Resources market research report providing professional data support and strategic insights for business decision-making',
+  keywords: 'AI, Human Resources, Market Research, Business Analysis, Enterprise Strategy, Japan SME',
   authors: [{ name: 'AI-HR Research Team' }],
   robots: 'index, follow',
   openGraph: {
-    title: 'AI+HR市场调研报告',
-    description: '专业的AI与人力资源市场分析报告',
+    title: 'AI+HR Market Research Report',
+    description: 'Professional AI and Human Resources market analysis report',
     type: 'website',
-    locale: 'zh_CN',
+    locale: 'en_US',
   }
 }
 
@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="zh-CN">
+    <html lang="en">
       <body className="antialiased" suppressHydrationWarning={true}>
         {children}
       </body>

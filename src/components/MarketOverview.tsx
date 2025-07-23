@@ -1,9 +1,11 @@
 'use client'
 
 import { TrendingUp, DollarSign, Users2, Globe } from 'lucide-react'
-import { marketTrends, keyInsights } from '@/data/marketData'
+import { marketTrends } from '@/data/marketData'
+import { useTranslation } from '@/i18n/config'
 
 export default function MarketOverview() {
+  const { t } = useTranslation()
   const currentYear = marketTrends.find(trend => trend.year === '2024')
 
   return (
@@ -11,10 +13,10 @@ export default function MarketOverview() {
       <div className="container-max section-padding">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            市场概览
+            {t.marketOverview.title}
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            AI+HR市场正经历快速增长期，技术创新与商业需求双重驱动下，市场规模持续扩大
+            {t.marketOverview.subtitle}
           </p>
         </div>
 
@@ -25,7 +27,7 @@ export default function MarketOverview() {
               <DollarSign className="h-6 w-6 text-green-600" />
             </div>
             <div className="text-2xl font-bold text-gray-900 mb-2">$24.1B</div>
-            <div className="text-sm text-gray-600">2024年市场规模</div>
+            <div className="text-sm text-gray-600">{t.marketOverview.metrics.marketSize2024}</div>
           </div>
           
           <div className="card p-6 text-center">
@@ -33,7 +35,7 @@ export default function MarketOverview() {
               <TrendingUp className="h-6 w-6 text-blue-600" />
             </div>
             <div className="text-2xl font-bold text-gray-900 mb-2">78%</div>
-            <div className="text-sm text-gray-600">AI技术采用率</div>
+            <div className="text-sm text-gray-600">{t.marketOverview.metrics.aiAdoption}</div>
           </div>
           
           <div className="card p-6 text-center">
@@ -41,7 +43,7 @@ export default function MarketOverview() {
               <Users2 className="h-6 w-6 text-purple-600" />
             </div>
             <div className="text-2xl font-bold text-gray-900 mb-2">13%</div>
-            <div className="text-sm text-gray-600">年增长率</div>
+            <div className="text-sm text-gray-600">{t.marketOverview.metrics.growthRate}</div>
           </div>
           
           <div className="card p-6 text-center">
@@ -49,7 +51,7 @@ export default function MarketOverview() {
               <Globe className="h-6 w-6 text-orange-600" />
             </div>
             <div className="text-2xl font-bold text-gray-900 mb-2">$45.2B</div>
-            <div className="text-sm text-gray-600">2026年预测规模</div>
+            <div className="text-sm text-gray-600">{t.marketOverview.metrics.forecast2026}</div>
           </div>
         </div>
 
@@ -58,10 +60,10 @@ export default function MarketOverview() {
           <div className="card p-8">
             <h3 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
               <TrendingUp className="h-5 w-5 text-primary-600 mr-2" />
-              市场驱动因素
+              {t.marketOverview.drivers.title}
             </h3>
             <ul className="space-y-3">
-              {keyInsights.market_drivers.map((driver, index) => (
+              {t.marketOverview.drivers.items.map((driver, index) => (
                 <li key={index} className="flex items-start">
                   <div className="w-2 h-2 bg-primary-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
                   <span className="text-gray-700">{driver}</span>
@@ -73,10 +75,10 @@ export default function MarketOverview() {
           <div className="card p-8">
             <h3 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
               <Users2 className="h-5 w-5 text-accent-600 mr-2" />
-              成功关键因素
+              {t.marketOverview.successFactors.title}
             </h3>
             <ul className="space-y-3">
-              {keyInsights.success_factors.map((factor, index) => (
+              {t.marketOverview.successFactors.items.map((factor, index) => (
                 <li key={index} className="flex items-start">
                   <div className="w-2 h-2 bg-accent-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
                   <span className="text-gray-700">{factor}</span>
@@ -88,7 +90,7 @@ export default function MarketOverview() {
 
         {/* Market Timeline */}
         <div className="card p-8">
-          <h3 className="text-xl font-semibold text-gray-900 mb-6">市场发展时间线</h3>
+          <h3 className="text-xl font-semibold text-gray-900 mb-6">{t.marketOverview.timeline.title}</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
             {marketTrends.map((trend, index) => (
               <div key={trend.year} className="text-center">
@@ -104,7 +106,7 @@ export default function MarketOverview() {
               </div>
             ))}
           </div>
-          <p className="text-sm text-gray-500 mt-4 text-center">* 预测数据</p>
+          <p className="text-sm text-gray-500 mt-4 text-center">* {t.marketOverview.timeline.forecast}</p>
         </div>
       </div>
     </section>

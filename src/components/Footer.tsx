@@ -1,36 +1,38 @@
 'use client'
 
 import { BarChart3, Mail, FileText, Calendar } from 'lucide-react'
+import { useTranslation } from '@/i18n/config'
 
 export default function Footer() {
+  const { t } = useTranslation()
   const currentYear = new Date().getFullYear()
 
   const footerSections = [
     {
-      title: '报告内容',
+      title: t.footer.sections.reportContent.title,
       links: [
-        { name: '市场概览', href: '#overview' },
-        { name: '趋势分析', href: '#trends' },
-        { name: '竞争格局', href: '#competition' },
-        { name: '商业机会', href: '#opportunities' },
-        { name: '战略建议', href: '#strategy' }
+        { name: t.footer.sections.reportContent.marketOverview, href: '#overview' },
+        { name: t.footer.sections.reportContent.trendAnalysis, href: '#trends' },
+        { name: t.footer.sections.reportContent.competitiveLandscape, href: '#competition' },
+        { name: t.footer.sections.reportContent.businessOpportunities, href: '#opportunities' },
+        { name: t.footer.sections.reportContent.strategicRecommendations, href: '#strategy' }
       ]
     },
     {
-      title: '研究方法',
+      title: t.footer.sections.researchMethods.title,
       links: [
-        { name: '数据来源', href: '#' },
-        { name: '分析框架', href: '#' },
-        { name: '预测模型', href: '#' },
-        { name: '验证方法', href: '#' }
+        { name: t.footer.sections.researchMethods.dataSources, href: '#' },
+        { name: t.footer.sections.researchMethods.analyticalFramework, href: '#' },
+        { name: t.footer.sections.researchMethods.predictionModels, href: '#' },
+        { name: t.footer.sections.researchMethods.validationMethods, href: '#' }
       ]
     },
     {
-      title: '联系我们',
+      title: t.footer.sections.contactUs.title,
       links: [
-        { name: '商务合作', href: '#', icon: Mail },
-        { name: '定制报告', href: '#', icon: FileText },
-        { name: '咨询服务', href: '#', icon: Calendar }
+        { name: t.footer.sections.contactUs.businessCooperation, href: '#', icon: Mail },
+        { name: t.footer.sections.contactUs.customReports, href: '#', icon: FileText },
+        { name: t.footer.sections.contactUs.consultingServices, href: '#', icon: Calendar }
       ]
     }
   ]
@@ -47,18 +49,17 @@ export default function Footer() {
                 <BarChart3 className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h3 className="text-lg font-bold">AI+HR 研究中心</h3>
-                <p className="text-sm text-gray-400">专业市场分析</p>
+                <h3 className="text-lg font-bold">{t.footer.companyName}</h3>
+                <p className="text-sm text-gray-400">{t.footer.companyTagline}</p>
               </div>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed mb-4">
-              专注于人工智能与人力资源领域的前沿研究，
-              为企业决策提供专业的数据支持和战略洞察。
+              {t.footer.companyDescription}
             </p>
             <div className="flex space-x-4">
               <div className="bg-gray-800 px-3 py-2 rounded text-xs text-gray-300">
                 <Calendar className="h-3 w-3 inline mr-1" />
-                更新于 {new Date().toLocaleDateString('zh-CN')}
+                {t.footer.updatedOn} {new Date().toLocaleDateString()}
               </div>
             </div>
           </div>
@@ -89,19 +90,19 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="text-2xl font-bold text-primary-400 mb-1">$24.1B</div>
-              <div className="text-sm text-gray-400">2024年市场规模</div>
+              <div className="text-sm text-gray-400">{t.footer.reportSummary.marketSize2024}</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-accent-400 mb-1">78%</div>
-              <div className="text-sm text-gray-400">AI技术采用率</div>
+              <div className="text-sm text-gray-400">{t.footer.reportSummary.aiAdoption}</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-green-400 mb-1">$45.2B</div>
-              <div className="text-sm text-gray-400">2026年预测规模</div>
+              <div className="text-sm text-gray-400">{t.footer.reportSummary.forecast2026}</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-yellow-400 mb-1">6</div>
-              <div className="text-sm text-gray-400">关键商业机会</div>
+              <div className="text-sm text-gray-400">{t.footer.reportSummary.keyOpportunities}</div>
             </div>
           </div>
         </div>
@@ -111,16 +112,14 @@ export default function Footer() {
           <div className="bg-gray-800 rounded-lg p-6 mb-6">
             <h4 className="font-semibold text-white mb-3 flex items-center">
               <FileText className="h-4 w-4 mr-2" />
-              报告声明
+              {t.footer.disclaimer.title}
             </h4>
             <div className="text-sm text-gray-300 space-y-2">
               <p>
-                本报告基于公开信息和行业研究编制，旨在提供市场趋势和商业洞察。
-                报告中的预测和建议仅供参考，不构成投资建议。
+                {t.footer.disclaimer.mainText}
               </p>
               <p>
-                数据来源包括但不限于：行业报告、公开财报、市场调研、专家访谈等。
-                我们致力于确保信息的准确性，但对于数据的完整性和时效性不承担责任。
+                {t.footer.disclaimer.dataText}
               </p>
             </div>
           </div>
@@ -129,12 +128,12 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between">
           <div className="text-sm text-gray-400 mb-4 md:mb-0">
-            © {currentYear} AI+HR 市场调研报告. 版权所有
+            © {currentYear} {t.footer.copyright}
           </div>
           <div className="flex items-center space-x-6 text-sm text-gray-400">
-            <span>专业 • 可信 • 前瞻</span>
+            <span>{t.footer.tagline}</span>
             <span>•</span>
-            <span>商业决策支持</span>
+            <span>{t.footer.businessSupport}</span>
           </div>
         </div>
       </div>

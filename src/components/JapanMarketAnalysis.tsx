@@ -3,15 +3,17 @@
 import { useState } from 'react'
 import { TrendingUp, Building, Users, ChevronDown, ChevronUp, Target } from 'lucide-react'
 import { japanMarketData, legalBenefits, popularBenefits } from '@/data/japanMarketData'
+import { useTranslation } from '@/i18n/config'
 
 export default function JapanMarketAnalysis() {
+  const { t } = useTranslation()
   const [activeTab, setActiveTab] = useState<'market' | 'benefits' | 'challenges'>('market')
   const [expandedBenefit, setExpandedBenefit] = useState<number | null>(null)
 
   const marketStats = [
     {
       icon: TrendingUp,
-      title: '市场规模增长',
+      title: t.japanMarketAnalysis.marketStats.marketGrowth,
       current: `¥${japanMarketData.marketSize.current}B`,
       projected: `¥${japanMarketData.marketSize.projected}B`,
       growth: `${japanMarketData.marketSize.growth}%`,
@@ -19,81 +21,81 @@ export default function JapanMarketAnalysis() {
     },
     {
       icon: Building,
-      title: '中小企业规模',
+      title: t.japanMarketAnalysis.marketStats.smeScale,
       current: `${japanMarketData.smeData.percentage}%`,
-      projected: '企业总数占比',
+      projected: t.japanMarketAnalysis.marketStats.employmentRatio,
       growth: `${japanMarketData.smeData.employment}%`,
-      period: '雇佣劳动力'
+      period: t.japanMarketAnalysis.marketStats.employmentForce
     },
     {
       icon: Users,
-      title: '人才流失挑战',
+      title: t.japanMarketAnalysis.marketStats.talentChallenge,
       current: `${japanMarketData.smeData.turnoverRate}%`,
-      projected: '年离职率',
+      projected: t.japanMarketAnalysis.marketStats.annualTurnover,
       growth: `${japanMarketData.smeData.bankruptcies}`,
-      period: '2024年破产企业'
+      period: t.japanMarketAnalysis.marketStats.bankruptcies2024
     }
   ]
 
   const pricingComparison = [
     {
-      type: '外国系统',
+      type: t.japanMarketAnalysis.pricing.foreignSystems,
       range: `$${japanMarketData.pricing.foreign.min}-${japanMarketData.pricing.foreign.max}`,
-      period: '员工/月',
-      status: '过于昂贵',
-      description: '功能强大但价格过高'
+      period: t.japanMarketAnalysis.pricing.employeeMonth,
+      status: t.japanMarketAnalysis.pricing.tooExpensive,
+      description: t.japanMarketAnalysis.pricing.powerfulButExpensive
     },
     {
-      type: '最佳价格点',
+      type: t.japanMarketAnalysis.pricing.optimalPrice,
       range: `¥${japanMarketData.pricing.optimal.min}-${japanMarketData.pricing.optimal.max}`,
-      period: '员工/月',
-      status: '市场空白',
-      description: '功能完整且价格合理',
+      period: t.japanMarketAnalysis.pricing.employeeMonth,
+      status: t.japanMarketAnalysis.pricing.marketGap,
+      description: t.japanMarketAnalysis.pricing.completeAndReasonable,
       isOpportunity: true
     },
     {
-      type: '当前国内产品',
+      type: t.japanMarketAnalysis.pricing.currentDomestic,
       range: `¥${japanMarketData.pricing.current.min}-${japanMarketData.pricing.current.max}`,
-      period: '员工/月',
-      status: '功能有限',
-      description: '价格适中但缺乏集成'
+      period: t.japanMarketAnalysis.pricing.employeeMonth,
+      status: t.japanMarketAnalysis.pricing.limitedFeatures,
+      description: t.japanMarketAnalysis.pricing.affordableButLimited
     }
   ]
 
   const challenges = [
     {
-      title: '预算约束',
-      description: '中小企业HR预算有限，无法承担每员工$28-38/月的外国系统成本',
-      impact: '高',
-      solution: '提供¥200-500/员工/月的经济实惠解决方案'
+      title: t.japanMarketAnalysis.challenges.budgetConstraints,
+      description: t.japanMarketAnalysis.challenges.budgetDescription,
+      impact: t.japanMarketAnalysis.challenges.impactHigh,
+      solution: t.japanMarketAnalysis.challenges.budgetSolution
     },
     {
-      title: '管理复杂度',
-      description: '中小企业通常只有1-3名HR员工，需要简单易用的系统',
-      impact: '高',
-      solution: 'AI自动化管理，减少人工干预需求'
+      title: t.japanMarketAnalysis.challenges.managementComplexity,
+      description: t.japanMarketAnalysis.challenges.managementDescription,
+      impact: t.japanMarketAnalysis.challenges.impactHigh,
+      solution: t.japanMarketAnalysis.challenges.managementSolution
     },
     {
-      title: '文化适应性',
-      description: '日本"本音"与"建前"文化特征，传统调查方法效果有限',
-      impact: '中',
-      solution: '多模态测量+NLP情感分析'
+      title: t.japanMarketAnalysis.challenges.culturalAdaptation,
+      description: t.japanMarketAnalysis.challenges.culturalDescription,
+      impact: t.japanMarketAnalysis.challenges.impactMedium,
+      solution: t.japanMarketAnalysis.challenges.culturalSolution
     },
     {
-      title: '功能分散',
-      description: '现有解决方案功能单一，缺乏集成平台',
-      impact: '中',
-      solution: '基于JD-R模型的一体化解决方案'
+      title: t.japanMarketAnalysis.challenges.featureFragmentation,
+      description: t.japanMarketAnalysis.challenges.fragmentationDescription,
+      impact: t.japanMarketAnalysis.challenges.impactMedium,
+      solution: t.japanMarketAnalysis.challenges.fragmentationSolution
     }
   ]
 
   const getImpactColor = (impact: string) => {
     const colors = {
-      '高': 'bg-rose-50 text-rose-600',
-      '中': 'bg-blue-50 text-blue-600',
-      '低': 'bg-gray-50 text-gray-600'
+      [t.japanMarketAnalysis.challenges.impactHigh]: 'bg-rose-50 text-rose-600',
+      [t.japanMarketAnalysis.challenges.impactMedium]: 'bg-blue-50 text-blue-600',
+      [t.japanMarketAnalysis.challenges.impactLow]: 'bg-gray-50 text-gray-600'
     }
-    return colors[impact as keyof typeof colors] || colors['中']
+    return colors[impact as keyof typeof colors] || colors[t.japanMarketAnalysis.challenges.impactMedium]
   }
 
   return (
@@ -101,10 +103,10 @@ export default function JapanMarketAnalysis() {
       <div className="container-max section-padding">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            日本中小企业HR科技市场深度分析
+            {t.japanMarketAnalysis.title}
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            基于经团联调查、政府统计数据和行业研究的专业市场分析
+            {t.japanMarketAnalysis.subtitle}
           </p>
         </div>
 
@@ -116,7 +118,7 @@ export default function JapanMarketAnalysis() {
               activeTab === 'market' ? 'bg-white text-primary-600 shadow' : 'text-gray-600 hover:text-gray-900'
             }`}
           >
-            市场规模
+            {t.japanMarketAnalysis.tabs.market}
           </button>
           <button
             onClick={() => setActiveTab('benefits')}
@@ -124,7 +126,7 @@ export default function JapanMarketAnalysis() {
               activeTab === 'benefits' ? 'bg-white text-primary-600 shadow' : 'text-gray-600 hover:text-gray-900'
             }`}
           >
-            福利现状
+            {t.japanMarketAnalysis.tabs.benefits}
           </button>
           <button
             onClick={() => setActiveTab('challenges')}
@@ -132,7 +134,7 @@ export default function JapanMarketAnalysis() {
               activeTab === 'challenges' ? 'bg-white text-primary-600 shadow' : 'text-gray-600 hover:text-gray-900'
             }`}
           >
-            挑战分析
+            {t.japanMarketAnalysis.tabs.challenges}
           </button>
         </div>
 
@@ -151,7 +153,7 @@ export default function JapanMarketAnalysis() {
                   </div>
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm text-gray-600">当前</span>
+                      <span className="text-sm text-gray-600">{t.japanMarketAnalysis.marketStats.current}</span>
                       <span className="text-xl font-bold text-gray-900">{stat.current}</span>
                     </div>
                     <div className="flex items-center justify-between">
@@ -166,7 +168,7 @@ export default function JapanMarketAnalysis() {
 
             {/* Pricing Strategy Analysis */}
             <div className="card p-8">
-              <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">定价策略分析</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">{t.japanMarketAnalysis.pricing.title}</h3>
               
               {/* Price Segments */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -181,7 +183,7 @@ export default function JapanMarketAnalysis() {
                   >
                     {pricing.isOpportunity && (
                       <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                        <span className="bg-blue-600 text-white text-xs px-3 py-1 rounded-full">机会窗口</span>
+                        <span className="bg-blue-600 text-white text-xs px-3 py-1 rounded-full">{t.japanMarketAnalysis.pricing.opportunityWindow}</span>
                       </div>
                     )}
                     
@@ -232,10 +234,10 @@ export default function JapanMarketAnalysis() {
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
                 <div className="flex items-center justify-center mb-3">
                   <Target className="h-5 w-5 text-blue-600 mr-2" />
-                  <span className="font-semibold text-blue-900">核心机会</span>
+                  <span className="font-semibold text-blue-900">{t.japanMarketAnalysis.pricing.coreOpportunity}</span>
                 </div>
                 <p className="text-blue-800 text-sm">
-                  在¥200-500/员工/月价格区间提供功能完整的AI驱动解决方案，填补市场空白
+                  {t.japanMarketAnalysis.pricing.opportunityDescription}
                 </p>
               </div>
             </div>
@@ -247,10 +249,10 @@ export default function JapanMarketAnalysis() {
           <div className="space-y-8">
             {/* Legal Benefits Overview */}
             <div className="card p-8">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">法定福利基础</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">{t.japanMarketAnalysis.benefits.legalBenefitsTitle}</h3>
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
                 <p className="text-blue-800">
-                  <strong>关键数据：</strong>法定福利费用约占工资总额的30.51%，企业平均每月为员工负担84,392日元
+                  <strong>{t.japanMarketAnalysis.benefits.keyDataLabel}</strong>{t.japanMarketAnalysis.benefits.keyDataText}
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -258,7 +260,7 @@ export default function JapanMarketAnalysis() {
                   <div key={index} className="border border-gray-200 rounded-lg p-4">
                     <h4 className="font-semibold text-gray-900 mb-2">{benefit.name}</h4>
                     <p className="text-sm text-gray-600 mb-2">{benefit.description}</p>
-                    <div className="text-xs text-gray-500">占工资总额: {benefit.cost}%</div>
+                    <div className="text-xs text-gray-500">{t.japanMarketAnalysis.benefits.salaryRatio}: {benefit.cost}%</div>
                   </div>
                 ))}
               </div>
@@ -266,7 +268,7 @@ export default function JapanMarketAnalysis() {
 
             {/* Popular Benefits Ranking */}
             <div className="card p-8">
-              <h3 className="text-xl font-semibold text-gray-900 mb-6">中小企业热门法定外福利排名</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-6">{t.japanMarketAnalysis.benefits.popularBenefitsTitle}</h3>
               <div className="space-y-4">
                 {popularBenefits.map((benefit, index) => (
                   <div key={index} className="border border-gray-200 rounded-lg">
@@ -287,7 +289,7 @@ export default function JapanMarketAnalysis() {
                                 benefit.cost === 'medium' ? 'bg-blue-50 text-blue-600' :
                                 'bg-rose-50 text-rose-600'
                               }`}>
-                                {benefit.cost === 'low' ? '低成本' : benefit.cost === 'medium' ? '中等成本' : '高成本'}
+                                {benefit.cost === 'low' ? t.japanMarketAnalysis.benefits.lowCost : benefit.cost === 'medium' ? t.japanMarketAnalysis.benefits.mediumCost : t.japanMarketAnalysis.benefits.highCost}
                               </span>
                             </div>
                           </div>
@@ -298,7 +300,7 @@ export default function JapanMarketAnalysis() {
                     {expandedBenefit === index && (
                       <div className="px-4 pb-4 border-t border-gray-100">
                         <div className="pt-4">
-                          <h5 className="font-medium text-gray-900 mb-2">具体示例</h5>
+                          <h5 className="font-medium text-gray-900 mb-2">{t.japanMarketAnalysis.benefits.examples}</h5>
                           <div className="flex flex-wrap gap-2 mb-3">
                             {benefit.examples.map((example, exIndex) => (
                               <span key={exIndex} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
@@ -306,7 +308,7 @@ export default function JapanMarketAnalysis() {
                               </span>
                             ))}
                           </div>
-                          <h5 className="font-medium text-gray-900 mb-2">受欢迎原因</h5>
+                          <h5 className="font-medium text-gray-900 mb-2">{t.japanMarketAnalysis.benefits.popularityReason}</h5>
                           <p className="text-gray-600 text-sm">{benefit.popularity}</p>
                         </div>
                       </div>
@@ -329,12 +331,12 @@ export default function JapanMarketAnalysis() {
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">{challenge.title}</h3>
                   <span className={`px-3 py-1 rounded-full text-xs font-medium ${getImpactColor(challenge.impact)}`}>
-                    影响: {challenge.impact}
+                    {t.japanMarketAnalysis.challenges.impactLabel}: {challenge.impact}
                   </span>
                 </div>
                 <p className="text-gray-600 mb-4 text-center">{challenge.description}</p>
                 <div className="bg-blue-50 rounded-lg p-4">
-                  <h4 className="font-medium text-blue-700 mb-2 text-center">解决方案</h4>
+                  <h4 className="font-medium text-blue-700 mb-2 text-center">{t.japanMarketAnalysis.challenges.solutionLabel}</h4>
                   <p className="text-blue-600 text-sm text-center">{challenge.solution}</p>
                 </div>
               </div>

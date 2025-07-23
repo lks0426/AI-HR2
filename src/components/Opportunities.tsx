@@ -2,8 +2,11 @@
 
 import { Target, Clock, DollarSign, AlertCircle, CheckCircle } from 'lucide-react'
 import { opportunities } from '@/data/marketData'
+import { useTranslation } from '@/i18n/config'
 
 export default function Opportunities() {
+  const { t } = useTranslation()
+  
   const getDifficultyColor = (difficulty: string) => {
     const colors = {
       'Low': 'bg-emerald-50 text-emerald-700',
@@ -26,10 +29,10 @@ export default function Opportunities() {
       <div className="container-max section-padding">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            商业机会分析
+            {t.opportunities.title}
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            AI+HR领域存在多个高价值商业机会，总市场潜力超过${totalMarketPotential.toFixed(1)}B
+            {t.opportunities.subtitle} ${totalMarketPotential.toFixed(1)}B
           </p>
         </div>
 
@@ -40,7 +43,7 @@ export default function Opportunities() {
               <Target className="h-6 w-6 text-blue-600" />
             </div>
             <div className="text-2xl font-bold text-gray-900 mb-2">{opportunities.length}</div>
-            <div className="text-sm text-gray-600">关键机会领域</div>
+            <div className="text-sm text-gray-600">{t.opportunities.summary.keyOpportunities}</div>
           </div>
           
           <div className="card p-6 text-center">
@@ -48,7 +51,7 @@ export default function Opportunities() {
               <DollarSign className="h-6 w-6 text-green-600" />
             </div>
             <div className="text-2xl font-bold text-gray-900 mb-2">${totalMarketPotential.toFixed(1)}B</div>
-            <div className="text-sm text-gray-600">总市场潜力</div>
+            <div className="text-sm text-gray-600">{t.opportunities.summary.totalMarketPotential}</div>
           </div>
           
           <div className="card p-6 text-center">
@@ -56,7 +59,7 @@ export default function Opportunities() {
               <Clock className="h-6 w-6 text-gray-600" />
             </div>
             <div className="text-2xl font-bold text-gray-900 mb-2">12-18</div>
-            <div className="text-sm text-gray-600">平均实施周期(月)</div>
+            <div className="text-sm text-gray-600">{t.opportunities.summary.averageImplementation}</div>
           </div>
           
           <div className="card p-6 text-center">
@@ -66,7 +69,7 @@ export default function Opportunities() {
             <div className="text-2xl font-bold text-gray-900 mb-2">
               {opportunities.filter(opp => opp.difficulty === 'Low').length}
             </div>
-            <div className="text-sm text-gray-600">低难度机会</div>
+            <div className="text-sm text-gray-600">{t.opportunities.summary.lowDifficultyOpportunities}</div>
           </div>
         </div>
 
@@ -85,7 +88,7 @@ export default function Opportunities() {
                     <div className="text-2xl font-bold text-primary-600">
                       ${opportunity.market_potential}B
                     </div>
-                    <div className="text-sm text-gray-600">市场潜力</div>
+                    <div className="text-sm text-gray-600">{t.opportunities.summary.marketPotential}</div>
                   </div>
                 </div>
 
@@ -104,8 +107,8 @@ export default function Opportunities() {
                   <div className="flex items-center space-x-2">
                     <DifficultyIcon className="h-4 w-4" />
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${getDifficultyColor(opportunity.difficulty)}`}>
-                      {opportunity.difficulty === 'Low' ? '低难度' : 
-                       opportunity.difficulty === 'Medium' ? '中等难度' : '高难度'}
+                      {opportunity.difficulty === 'Low' ? t.opportunities.difficulty.low : 
+                       opportunity.difficulty === 'Medium' ? t.opportunities.difficulty.medium : t.opportunities.difficulty.high}
                     </span>
                   </div>
                 </div>
@@ -113,7 +116,7 @@ export default function Opportunities() {
                 {/* Progress Bar for Market Potential */}
                 <div className="mt-4">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-gray-700">市场潜力评分</span>
+                    <span className="text-sm font-medium text-gray-700">{t.opportunities.marketPotentialScore}</span>
                     <span className="text-sm text-gray-600">{((opportunity.market_potential / 15) * 100).toFixed(0)}%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
@@ -130,9 +133,9 @@ export default function Opportunities() {
 
         {/* Investment Priority Matrix */}
         <div className="card p-8">
-          <h3 className="text-xl font-semibold text-gray-900 mb-6">投资优先级矩阵</h3>
+          <h3 className="text-xl font-semibold text-gray-900 mb-6">{t.opportunities.priorityMatrix.title}</h3>
           <p className="text-gray-600 mb-8">
-            基于市场潜力和实施难度的投资优先级分析
+            {t.opportunities.priorityMatrix.description}
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -140,7 +143,7 @@ export default function Opportunities() {
             <div className="bg-green-50 border-2 border-green-200 rounded-lg p-6">
               <h4 className="font-semibold text-green-900 mb-4 flex items-center">
                 <CheckCircle className="h-5 w-5 mr-2" />
-                高优先级 (立即投资)
+                {t.opportunities.priorityMatrix.highPriority.title} {t.opportunities.priorityMatrix.highPriority.subtitle}
               </h4>
               <div className="space-y-3">
                 {opportunities
@@ -158,7 +161,7 @@ export default function Opportunities() {
             <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-6">
               <h4 className="font-semibold text-yellow-900 mb-4 flex items-center">
                 <Target className="h-5 w-5 mr-2" />
-                中优先级 (规划投资)
+                {t.opportunities.priorityMatrix.mediumPriority.title} {t.opportunities.priorityMatrix.mediumPriority.subtitle}
               </h4>
               <div className="space-y-3">
                 {opportunities
@@ -179,7 +182,7 @@ export default function Opportunities() {
             <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-6">
               <h4 className="font-semibold text-orange-900 mb-4 flex items-center">
                 <AlertCircle className="h-5 w-5 mr-2" />
-                低优先级 (长期考虑)
+                {t.opportunities.priorityMatrix.lowPriority.title} {t.opportunities.priorityMatrix.lowPriority.subtitle}
               </h4>
               <div className="space-y-3">
                 {opportunities

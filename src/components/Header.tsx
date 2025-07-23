@@ -2,16 +2,19 @@
 
 import { useState } from 'react'
 import { Menu, X, BarChart3 } from 'lucide-react'
+import { useTranslation } from '@/i18n/config'
+import LanguageSwitcher from './LanguageSwitcher'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { t } = useTranslation()
 
   const navItems = [
-    { name: '日本市场分析', href: '#market-analysis' },
-    { name: '工作投入度', href: '#work-engagement' },
-    { name: '竞争格局', href: '#competition' },
+    { name: t.nav.market, href: '#market-analysis' },
+    { name: t.japanMarket.workEngagement.vigor.dimension.split(' ')[0], href: '#work-engagement' },
+    { name: t.nav.competition, href: '#competition' },
     { name: '成功案例', href: '#case-study' },
-    { name: 'AI解决方案', href: '#solution' },
+    { name: t.nav.solution, href: '#solution' },
     { name: '战略建议', href: '#strategy' }
   ]
 
@@ -25,8 +28,8 @@ export default function Header() {
               <BarChart3 className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">AI+HR 市场调研</h1>
-              <p className="text-sm text-gray-600">专业商业分析报告</p>
+              <h1 className="text-xl font-bold text-gray-900">{t.hero.title}</h1>
+              <p className="text-sm text-gray-600">{t.hero.subtitle}</p>
             </div>
           </div>
 
@@ -41,10 +44,12 @@ export default function Header() {
                 {item.name}
               </a>
             ))}
+            <LanguageSwitcher />
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile menu button and language switcher */}
+          <div className="md:hidden flex items-center space-x-3">
+            <LanguageSwitcher />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-700 hover:text-primary-600 transition-colors"

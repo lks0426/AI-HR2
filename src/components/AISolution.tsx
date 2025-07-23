@@ -2,147 +2,121 @@
 
 import { useState } from 'react'
 import { Brain, Database, Target, Users, Zap, Shield, ChevronRight, CheckCircle } from 'lucide-react'
+import { useTranslation } from '@/i18n/config'
 
 export default function AISolution() {
   const [activeModule, setActiveModule] = useState<'measurement' | 'prediction' | 'recommendation' | 'integration'>('measurement')
+  const { t } = useTranslation()
 
   const systemArchitecture = {
     measurement: {
-      title: '测量引擎：多模态员工状态监测',
+      title: t.solution.modules.measurement.title,
       icon: Database,
-      description: '结合传统调查与AI技术，准确捕捉员工真实状态',
-      features: [
-        'UWES工作投入度量表(17项、9项、3项版本)',
-        '高频脉冲调查(Pulse Survey)',
-        'NLP情感分析处理自由文本评论',
-        '心率变异性(HRV)生理监测11111111222222',
-        '勤怠数据行为分析',
-        '文化适应性设计(应对"本音"与"建前")'
-      ],
-      technologies: ['自然语言处理', '情感计算', '生物识别', '统计分析']
+      description: t.solution.modules.measurement.description,
+      features: t.solution.modules.measurement.features,
+      technologies: t.solution.modules.measurement.technologies
     },
     prediction: {
-      title: 'AI预测核心：智能风险预警系统',
+      title: t.solution.modules.prediction.title,
       icon: Brain,
-      description: '基于机器学习的离职预测和幸福度趋势分析',
-      features: [
-        '离职预测模型(随机森林、LightGBM)',
-        '多维特征工程(个人信息、工作角色、绩效薪酬)',
-        '情绪趋势分析和异常检测',
-        '团队氛围传染效应建模',
-        '实时风险评分和预警',
-        '预测准确率>85%'
-      ],
-      technologies: ['机器学习', '深度学习', '时间序列分析', '异常检测']
+      description: t.solution.modules.prediction.description,
+      features: t.solution.modules.prediction.features,
+      technologies: t.solution.modules.prediction.technologies
     },
     recommendation: {
-      title: '个性化推荐：JD-R模型驱动的资源匹配',
+      title: t.solution.modules.recommendation.title,
       icon: Target,
-      description: '基于JD-R模型的智能工作资源推荐系统',
-      features: [
-        '个人工作要求-资源平衡分析',
-        'AI驱动的福利资源推荐',
-        '学习发展路径个性化定制',
-        '工作方式优化建议',
-        '团队干预措施推荐',
-        '反馈闭环持续优化'
-      ],
-      technologies: ['推荐算法', '协同过滤', '强化学习', '知识图谱']
+      description: t.solution.modules.recommendation.description,
+      features: t.solution.modules.recommendation.features,
+      technologies: t.solution.modules.recommendation.technologies
     },
     integration: {
-      title: '集成平台：企业级数据中枢',
+      title: t.solution.modules.integration.title,
       icon: Users,
-      description: '无缝集成现有HR系统，提供统一管理视图',
-      features: [
-        'HRIS系统深度集成',
-        '实时数据同步和处理',
-        '管理者仪表盘和分析视图',
-        '移动端员工门户',
-        '隐私保护和合规管理',
-        'API开放生态系统'
-      ],
-      technologies: ['云原生架构', '微服务', 'API网关', '数据湖']
+      description: t.solution.modules.integration.description,
+      features: t.solution.modules.integration.features,
+      technologies: t.solution.modules.integration.technologies
     }
   }
 
   const implementationPhases = [
     {
-      phase: '第1阶段：基础建设',
-      duration: '2025年9-11月',
-      focus: '核心基础设施',
-      deliverables: ['数据管道建设', '基础仪表板', 'HRIS集成', '安全框架'],
+      phase: t.solution.phases.phase1.title,
+      duration: t.solution.phases.phase1.duration,
+      focus: t.solution.phases.phase1.focus,
+      deliverables: t.solution.phases.phase1.deliverables,
       color: 'blue'
     },
     {
-      phase: '第2阶段：AI模型开发',
-      duration: '2025年12月-2026年1月',
-      focus: '智能算法实现',
-      deliverables: ['离职预测模型', '推荐引擎', 'NLP情感分析', '异常检测'],
+      phase: t.solution.phases.phase2.title,
+      duration: t.solution.phases.phase2.duration,
+      focus: t.solution.phases.phase2.focus,
+      deliverables: t.solution.phases.phase2.deliverables,
       color: 'purple'
     },
     {
-      phase: '第3阶段：用户界面',
-      duration: '2026年2-3月',
-      focus: '用户体验优化',
-      deliverables: ['移动应用', '增强仪表板', '用户培训', '游戏化元素'],
+      phase: t.solution.phases.phase3.title,
+      duration: t.solution.phases.phase3.duration,
+      focus: t.solution.phases.phase3.focus,
+      deliverables: t.solution.phases.phase3.deliverables,
       color: 'green'
     },
     {
-      phase: '第4阶段：生产部署',
-      duration: '2026年4月',
-      focus: '系统上线优化',
-      deliverables: ['系统优化', '安全测试', '生产部署', '持续支持'],
+      phase: t.solution.phases.phase4.title,
+      duration: t.solution.phases.phase4.duration,
+      focus: t.solution.phases.phase4.focus,
+      deliverables: t.solution.phases.phase4.deliverables,
       color: 'orange'
     }
   ]
 
   const aiFeatures = [
     {
-      feature: '文本挖掘和情感分析',
-      description: '分析员工反馈中的隐含情绪和关键主题',
-      benefit: '捕捉传统调查无法获得的深层洞察',
-      accuracy: '情感分类准确率>92%'
+      feature: t.solution.aiFeatures.textMining.feature,
+      description: t.solution.aiFeatures.textMining.description,
+      benefit: t.solution.aiFeatures.textMining.benefit,
+      accuracy: t.solution.aiFeatures.textMining.accuracy
     },
     {
-      feature: '离职风险预测',
-      description: '基于多维特征的员工离职概率评估',
-      benefit: '提前3-6个月识别高风险员工',
-      accuracy: '预测准确率>85%'
+      feature: t.solution.aiFeatures.turnoverPrediction.feature,
+      description: t.solution.aiFeatures.turnoverPrediction.description,
+      benefit: t.solution.aiFeatures.turnoverPrediction.benefit,
+      accuracy: t.solution.aiFeatures.turnoverPrediction.accuracy
     },
     {
-      feature: '个性化资源推荐',
-      description: '为每位员工量身定制的福利和发展建议',
-      benefit: '提高福利利用率和员工满意度',
-      accuracy: '推荐精度>80%'
+      feature: t.solution.aiFeatures.personalizedRecommendation.feature,
+      description: t.solution.aiFeatures.personalizedRecommendation.description,
+      benefit: t.solution.aiFeatures.personalizedRecommendation.benefit,
+      accuracy: t.solution.aiFeatures.personalizedRecommendation.accuracy
     },
     {
-      feature: '团队动态分析',
-      description: '识别团队情绪传染和协作模式',
-      benefit: '优化团队配置和管理策略',
-      accuracy: '团队风险识别率>78%'
+      feature: t.solution.aiFeatures.teamDynamics.feature,
+      description: t.solution.aiFeatures.teamDynamics.description,
+      benefit: t.solution.aiFeatures.teamDynamics.benefit,
+      accuracy: t.solution.aiFeatures.teamDynamics.accuracy
     }
   ]
 
   const privacyCompliance = [
     {
-      aspect: '数据最小化',
-      description: '仅收集必要的数据，明确使用目的',
-      implementation: '基于APPI法规的数据收集策略'
+      aspect: t.solution.privacy.dataMinimization.aspect,
+      description: t.solution.privacy.dataMinimization.description,
+      implementation: t.solution.privacy.dataMinimization.implementation
     },
     {
-      aspect: '透明度保障',
-      description: '员工对数据使用有完全知情权',
-      implementation: '详细的隐私声明和同意机制'
+      aspect: t.solution.privacy.transparency.aspect,
+      description: t.solution.privacy.transparency.description,
+      implementation: t.solution.privacy.transparency.implementation
     },
     {
-      aspect: '技术保护',
-      description: '采用先进的隐私保护技术',
-      implementation: '联邦学习、差分隐私、数据加密'
+      aspect: t.solution.privacy.technicalProtection.aspect,
+      description: t.solution.privacy.technicalProtection.description,
+      implementation: t.solution.privacy.technicalProtection.implementation
     },
     {
-      aspect: '合规监管',
-      description: '符合日本个人信息保护法要求',
-      implementation: '定期合规审计和数据保护影响评估'
+      aspect: t.solution.privacy.compliance.aspect,
+      description: t.solution.privacy.compliance.description,
+      implementation: t.solution.privacy.compliance.implementation
     }
   ]
 
@@ -171,30 +145,26 @@ export default function AISolution() {
       <div className="container-max section-padding">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            AI赋能的员工幸福度管理平台
+            {t.solution.title}
           </h2>
           <p className="text-lg text-gray-600 max-w-4xl mx-auto">
-            基于JD-R模型的科学框架，通过AI技术实现"测量-诊断-干预"的完整闭环管理
+            {t.solution.subtitle}
           </p>
         </div>
 
         {/* Core Philosophy */}
         <div className="card p-8 mb-12">
-          <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">核心设计理念</h3>
+          <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">{t.solution.corePhilosophy}</h3>
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-dashed border-primary-300 rounded-lg p-6">
             <p className="text-center text-lg text-gray-700 leading-relaxed">
-              <span className="text-gray-900">"标准化幸福"</span> = 
-              通过AI持续监测每位员工的<span className="text-gray-600">工作要求</span>，
-              并智能推荐最适合的<span className="text-gray-600">工作资源</span>，
-              系统性维持<span className="text-gray-600">"要求-资源"动态平衡</span>，
-              最终促进高水平的<span className="text-gray-600">工作投入度</span>
+              {t.solution.philosophyDescription}
             </p>
           </div>
         </div>
 
         {/* System Architecture */}
         <div className="card p-8 mb-12">
-          <h3 className="text-xl font-semibold text-gray-900 mb-8">系统架构模块</h3>
+          <h3 className="text-xl font-semibold text-gray-900 mb-8">{t.solution.systemArchitecture}</h3>
           
           {/* Module Selector */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
@@ -236,7 +206,7 @@ export default function AISolution() {
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <h5 className="font-semibold text-gray-900 mb-3">核心功能</h5>
+                      <h5 className="font-semibold text-gray-900 mb-3">{t.common.coreFeatures}</h5>
                       <ul className="space-y-2">
                         {module.features.map((feature, index) => (
                           <li key={index} className="flex items-start text-sm text-gray-700">
@@ -248,7 +218,7 @@ export default function AISolution() {
                     </div>
                     
                     <div>
-                      <h5 className="font-semibold text-gray-900 mb-3">技术栈</h5>
+                      <h5 className="font-semibold text-gray-900 mb-3">{t.common.technologies}</h5>
                       <div className="flex flex-wrap gap-2">
                         {module.technologies.map((tech, index) => (
                           <span key={index} className="px-3 py-1 bg-primary-100 text-primary-800 text-xs rounded-full">
@@ -266,7 +236,7 @@ export default function AISolution() {
 
         {/* AI Features */}
         <div className="card p-8 mb-12">
-          <h3 className="text-xl font-semibold text-gray-900 mb-6">AI核心能力</h3>
+          <h3 className="text-xl font-semibold text-gray-900 mb-6">{t.solution.aiCapabilities}</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {aiFeatures.map((item, index) => (
               <div key={index} className="border border-gray-200 rounded-lg p-6">
@@ -281,7 +251,7 @@ export default function AISolution() {
                 </div>
                 <p className="text-gray-600 text-sm mb-4 text-center">{item.description}</p>
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-                  <h5 className="font-medium text-blue-900 mb-1 text-center">业务价值</h5>
+                  <h5 className="font-medium text-blue-900 mb-1 text-center">{t.common.businessValue}</h5>
                   <p className="text-blue-800 text-xs text-center">{item.benefit}</p>
                 </div>
               </div>
@@ -291,7 +261,7 @@ export default function AISolution() {
 
         {/* Implementation Timeline */}
         <div className="card p-8 mb-12">
-          <h3 className="text-xl font-semibold text-gray-900 mb-8">分阶段实施计划</h3>
+          <h3 className="text-xl font-semibold text-gray-900 mb-8">{t.solution.implementationPlan}</h3>
           <div className="space-y-6">
             {implementationPhases.map((phase, index) => (
               <div key={index} className="flex items-start space-x-4">
@@ -303,7 +273,7 @@ export default function AISolution() {
                     <h4 className="font-semibold text-gray-900">{phase.phase}</h4>
                     <span className="text-sm text-gray-500">{phase.duration}</span>
                   </div>
-                  <p className="text-gray-600 text-sm mb-3">聚焦：{phase.focus}</p>
+                  <p className="text-gray-600 text-sm mb-3">{t.common.focus}：{phase.focus}</p>
                   <div className="flex flex-wrap gap-2">
                     {phase.deliverables.map((deliverable, delIndex) => (
                       <span key={delIndex} className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
@@ -324,7 +294,7 @@ export default function AISolution() {
         <div className="card p-8">
           <h3 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
             <Shield className="h-6 w-6 text-green-600 mr-3" />
-            隐私保护与合规管理
+            {t.solution.privacyCompliance}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {privacyCompliance.map((item, index) => (

@@ -6,7 +6,7 @@ env:
     AWS_ACCOUNT_ID: "345289096628"
     IMAGE_REPO_NAME: "ai-hr-app"
     ECS_CLUSTER_NAME: "ai-hr-cluster"
-    ECS_SERVICE_NAME: "ai-hr-service"
+    ECS_SERVICE_NAME: "ai-hr-service-v2"
 
 phases:
   pre_build:

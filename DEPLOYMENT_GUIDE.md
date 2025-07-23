@@ -149,7 +149,7 @@ git push origin main
 ### 回滚策略
 如需回滚到之前版本：
 ```bash
-aws ecs update-service --cluster ai-hr-cluster --service ai-hr-service --task-definition ai-hr-task:PREVIOUS_REVISION
+aws ecs update-service --cluster ai-hr-cluster --service ai-hr-service-v2 --task-definition ai-hr-task:PREVIOUS_REVISION
 ```
 
 ## 🎉 完成！

@@ -9,7 +9,7 @@ AWS_REGION="ap-northeast-1"
 AWS_ACCOUNT_ID="345289096628"
 ECR_REPOSITORY="ai-hr-app"
 ECS_CLUSTER="ai-hr-cluster"
-ECS_SERVICE="ai-hr-service"
+ECS_SERVICE="ai-hr-service-v2"
 IMAGE_TAG="manual-$(date +%Y%m%d-%H%M%S)"
 
 echo "📦 构建Docker镜像..."

@@ -1,8 +1,11 @@
 'use client'
 
 import { TrendingUp, Users, Brain, Building2 } from 'lucide-react'
+import { useTranslation } from '@/i18n/config'
 
 export default function Hero() {
+  const { t } = useTranslation()
+  
   const stats = [
     { icon: TrendingUp, value: '6.94%', label: 'HR科技CAGR增长率' },
     { icon: Users, value: '99.7%', label: '日本中小企业占比' },

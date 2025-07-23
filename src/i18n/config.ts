@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
-import { getTranslation, Translation } from './translations'
+import { zh } from './locales/zh'
+import { ja } from './locales/ja' 
+import { en } from './locales/en'
 
 export type Locale = 'zh' | 'ja' | 'en'
+export type Translation = typeof zh
 
 export const locales: Locale[] = ['zh', 'ja', 'en']
 export const defaultLocale: Locale = 'zh'
@@ -16,6 +19,12 @@ export const localeFlags = {
   zh: '🇨🇳',
   ja: '🇯🇵',
   en: '🇺🇸'
+}
+
+const translations: Record<Locale, Translation> = {
+  zh,
+  ja,
+  en
 }
 
 export function useTranslation() {
@@ -36,14 +45,14 @@ export function useTranslation() {
     window.location.reload()
   }
   
-  const translations = getTranslation(currentLocale)
+  const t = translations[currentLocale] || translations[defaultLocale]
   
   return {
     locale: currentLocale,
     locales,
     changeLocale,
-    t: translations,
-    translate: (key: string, data?: any) => getNestedValue(translations, key) || key
+    t,
+    translate: (key: string, data?: any) => getNestedValue(t, key) || key
   }
 }
 

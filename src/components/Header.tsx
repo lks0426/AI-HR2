@@ -10,12 +10,12 @@ export default function Header() {
   const { t } = useTranslation()
 
   const navItems = [
-    { name: t.nav.market, href: '#market-analysis' },
-    { name: t.japanMarket.workEngagement.vigor.dimension.split(' ')[0], href: '#work-engagement' },
+    { name: t.nav.japanMarket, href: '#market-analysis' },
+    { name: t.nav.workEngagement, href: '#work-engagement' },
     { name: t.nav.competition, href: '#competition' },
-    { name: '成功案例', href: '#case-study' },
+    { name: t.nav.caseStudy, href: '#case-study' },
     { name: t.nav.solution, href: '#solution' },
-    { name: '战略建议', href: '#strategy' }
+    { name: t.nav.strategy, href: '#strategy' }
   ]
 
   return (
@@ -28,8 +28,8 @@ export default function Header() {
               <BarChart3 className="h-6 w-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">{t.hero.title}</h1>
-              <p className="text-sm text-gray-600">{t.hero.subtitle}</p>
+              <h1 className="text-xl font-bold text-gray-900">{t.site.title}</h1>
+              <p className="text-sm text-gray-600">{t.site.subtitle}</p>
             </div>
           </div>
 

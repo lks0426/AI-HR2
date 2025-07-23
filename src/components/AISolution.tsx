@@ -182,7 +182,7 @@ export default function AISolution() {
                 >
                   <IconComponent className="h-6 w-6 mx-auto mb-2" />
                   <div className="text-sm font-medium text-center">
-                    {module.title.split('：')[0]}
+                    {(module as any).shortTitle || module.title.split('：')[0] || module.title.split(':')[0]}
                   </div>
                 </button>
               )
